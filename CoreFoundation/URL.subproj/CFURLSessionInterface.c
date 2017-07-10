@@ -31,6 +31,9 @@ static CFURLSessionMultiCode MakeMultiCode(CURLMcode value) {
     return (CFURLSessionMultiCode) { value };
 }
 
+const char *CFURLSessionErrorDescription(int value) {
+    return curl_easy_strerror(value);
+}
 
 CFURLSessionEasyHandle _Nonnull CFURLSessionEasyHandleInit() {
     return curl_easy_init();

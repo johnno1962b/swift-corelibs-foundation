@@ -48,6 +48,8 @@ typedef struct CFURLSessionEasyCode {
     int value;
 } CFURLSessionEasyCode;
 
+CF_EXPORT const char * _Nonnull CFURLSessionErrorDescription(int value);
+
 /// CURLcode
 CF_EXPORT CFURLSessionEasyCode const CFURLSessionEasyCodeOK; // CURLE_OK
 CF_EXPORT CFURLSessionEasyCode const CFURLSessionEasyCodeUNSUPPORTED_PROTOCOL; // CURLE_UNSUPPORTED_PROTOCOL
