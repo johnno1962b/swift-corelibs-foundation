@@ -169,10 +169,10 @@ extension _EasyHandle {
         try! CFURLSession_easy_setopt_long(rawHandle, CFURLSessionOptionREDIR_PROTOCOLS, protocols).asError()
 #if os(Android)
         // See https://curl.haxx.se/docs/sslcerts.html
-        // For SSL to work you need "cacert.pem" to be accessable
-        // at the path pointed to by the URLSessionCAInfo env var.
+        // For SSL on Android you need a "cacert.pem" to be
+        // accessible at the path pointed to by this env var.
         // Downloadable here: https://curl.haxx.se/ca/cacert.pem
-        if let caInfo = getenv("URLSessionCAInfo")  {
+        if let caInfo = getenv("URLSessionCertificateAuthorityInfoFile")  {
             if String(cString: caInfo) == "INSECURE_SSL_NO_VERIFY" {
                 try! CFURLSession_easy_setopt_long(rawHandle, CFURLSessionOptionSSL_VERIFYPEER, 0).asError()
             }
