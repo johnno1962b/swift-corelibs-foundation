@@ -29,15 +29,6 @@ open class NSTimeZone : NSObject, NSCopying, NSSecureCoding, NSCoding {
     }
 
     public init?(name tzName: String, data aData: Data?) {
-#if os(Android)
-        var tzName = tzName
-        if tzName == "UTC" || tzName == "GMT" {
-            tzName = "GMT+00"
-        }
-        else if !(tzName.hasPrefix("GMT+") || tzName.hasPrefix("GMT-")) {
-            NSLog("TimeZone database not available on Android")
-        }
-#endif
         super.init()
         if !_CFTimeZoneInit(_cfObject, tzName._cfObject, aData?._cfObject) {
             return nil
