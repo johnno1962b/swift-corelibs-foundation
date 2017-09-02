@@ -214,12 +214,14 @@ fileprivate extension URLSession._MultiHandle {
         }
         let easyHandle = easyHandles[idx]
         // Find the NSURLError code
-        let errorCode = easyHandle.urlErrorCode(for: easyCode)
-        completedTransfer(forEasyHandle: easyHandle, errorCode: errorCode)
+        let errorInfo = easyHandle.urlErrorCode(for: easyCode).map {
+            URLErrorInfo(code: $0, description: String(cString: CFURLSessionErrorDescription(easyCode.value)))
+        }
+        completedTransfer(forEasyHandle: easyHandle, errorInfo: errorInfo)
     }
     /// Transfer completed.
-    func completedTransfer(forEasyHandle handle: _EasyHandle, errorCode: Int?) {
-        handle.completedTransfer(withErrorCode: errorCode)
+    func completedTransfer(forEasyHandle handle: _EasyHandle, errorInfo: URLErrorInfo?) {
+        handle.completedTransfer(withErrorInfo: errorInfo)
     }
 }
 
