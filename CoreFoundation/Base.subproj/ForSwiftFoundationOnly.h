@@ -27,7 +27,9 @@
 #include <CoreFoundation/ForFoundationOnly.h>
 #include <fts.h>
 #include <pthread.h>
+#ifndef __ANDROID__
 #include <execinfo.h>
+#endif
 
 _CF_EXPORT_SCOPE_BEGIN
 
